@@ -1,0 +1,45 @@
+{
+  "name": "video-id-builder",
+  "version": "1.0.0",
+  "description": "프로모션/기획/자체제작 영상 ID 생성기",
+  "main": "main.js",
+  "author": "internal",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.internal.videoidbuilder",
+    "productName": "VideoIDBuilder",
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "renderer.js",
+      "node_modules/ffmpeg-static/**"
+    ],
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**"
+    ],
+    "win": {
+      "target": ["portable", "nsis"],
+      "artifactName": "${productName}-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-portable.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "${productName}-${version}-setup.exe"
+    }
+  }
+}
