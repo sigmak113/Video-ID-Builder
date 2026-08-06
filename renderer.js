@@ -10,16 +10,24 @@
     { code: "K", label: "기획", builtin: true },
     { code: "S", label: "자체제작", builtin: true },
   ];
+  // 제품은 항상 "라인코드+번호" 형태로 통일. 지금은 라인당 제품이 하나뿐이어도
+  // 나중에 같은 라인에 제품이 추가되면 번호만 이어붙이면 되도록 처음부터 번호를 붙여둔다.
+  const DEFAULT_LINES = [
+    { code: "A", label: "A" },
+    { code: "B", label: "B" },
+    { code: "C", label: "C" },
+    { code: "D", label: "D" },
+  ];
   const DEFAULT_PRODUCTS = [
-    { code: "A", label: "A", lineCode: null, builtin: true },
-    { code: "B", label: "B", lineCode: null, builtin: true },
-    { code: "C", label: "C", lineCode: null, builtin: true },
-    { code: "D", label: "D", lineCode: null, builtin: true },
+    { code: "A1", label: "A", lineCode: "A", builtin: true },
+    { code: "B1", label: "B", lineCode: "B", builtin: true },
+    { code: "C1", label: "C", lineCode: "C", builtin: true },
+    { code: "D1", label: "D", lineCode: "D", builtin: true },
   ];
 
   const defaultState = {
     type: "P",
-    product: "A",
+    product: "A1",
     year: 26,
     round: 0,
     script: 0,
@@ -56,7 +64,7 @@
   let state = loadState();
   let typeList = loadList(TYPES_KEY, DEFAULT_TYPES);
   let productList = loadList(PRODUCTS_KEY, DEFAULT_PRODUCTS);
-  let lineList = loadList(LINES_KEY, []);
+  let lineList = loadList(LINES_KEY, DEFAULT_LINES);
 
   function pad2(n) {
     n = Math.max(0, Math.min(99, Number(n) || 0));
